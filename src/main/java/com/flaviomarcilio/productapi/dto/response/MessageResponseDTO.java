@@ -1,4 +1,4 @@
-package com.flaviomarcilio.productapi.dto;
+package com.flaviomarcilio.productapi.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
