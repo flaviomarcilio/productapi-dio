@@ -16,8 +16,11 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
@@ -31,10 +34,10 @@ jobs:
           cache: maven
           
       - name: Build
-        run: mvn -B package --file pom.xml
+        run: mvn -B -DskipTests package --file pom.xml
         
       - name: Test
-        run: mvn -B -D maven.test.failure.ignore=true test
+        run: mvn -B -Dmaven.test.failure.ignore=true test
         
       - name: Report
         uses: dorny/test-reporter@v1
