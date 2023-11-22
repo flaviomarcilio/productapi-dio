@@ -37,13 +37,13 @@ jobs:
         run: mvn -B -DskipTests package --file pom.xml
         
       - name: Test
-        run: mvn -B -Dmaven.test.failure.ignore=true test
+        run: mvn -B test
         
       - name: Report
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: Maven Tests
+          name: Maven Tests - ${{ matrix.os }}
           path: target/surefire-reports/*.xml
           reporter: java-junit
           fail-on-error: true
